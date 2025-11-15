@@ -8,27 +8,33 @@ package models;
  *
  * @author Engyz
  */
-import java.time.Instant;
+import java.util.UUID;
 
 public abstract class User {
     protected String userId;
-    protected String role; 
+    protected String role;
     protected String username;
     protected String email;
     protected String passwordHash;
-    protected long createdAt;
-
-    public User() { }
-
-    public User(String userId, String role, String username, String email, String passwordHash) {
-        this.userId = userId;
-        this.role = role;
+    public User(String username, String email, String passwordHash, String role) {
+        this.userId = UUID.randomUUID().toString();
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.createdAt = Instant.now().getEpochSecond();
+        this.role = role;
+    }
+    public User(String userId, String username, String email, String passwordHash, String role) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.role = role;
     }
 
+    // Abstract method for polymorphism
+    public abstract String getDetails();
+
+    // Getters and Setters
     public String getUserId() {
         return userId;
     }
@@ -69,12 +75,17 @@ public abstract class User {
         this.passwordHash = passwordHash;
     }
 
-    public long getCreatedAt() {
-        return createdAt;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", role='" + role + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
-    }
-
+ //   
+    
+    
 }
