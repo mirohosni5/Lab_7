@@ -8,12 +8,17 @@ package models;
  *
  * @author Engyz
  */
-    public abstract class User {
+import java.time.Instant;
+
+public abstract class User {
     protected String userId;
-    protected String role;
+    protected String role; 
     protected String username;
     protected String email;
     protected String passwordHash;
+    protected long createdAt;
+
+    public User() { }
 
     public User(String userId, String role, String username, String email, String passwordHash) {
         this.userId = userId;
@@ -21,6 +26,7 @@ package models;
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
+        this.createdAt = Instant.now().getEpochSecond();
     }
 
     public String getUserId() {
@@ -63,5 +69,12 @@ package models;
         this.passwordHash = passwordHash;
     }
 
-  
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
 }
