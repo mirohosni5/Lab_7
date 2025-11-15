@@ -78,7 +78,7 @@ public class JsonUserDatabase {
         }
 
         try (FileWriter writer = new FileWriter(USERS_FILE)) {
-            writer.write(jsonArray.toString(4)); // Pretty print with 4 spaces
+            writer.write(jsonArray.toString(4));
             writer.flush();
         } catch (IOException e) {
             System.err.println("Error writing to users.json: " + e.getMessage());
