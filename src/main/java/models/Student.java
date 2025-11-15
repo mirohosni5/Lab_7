@@ -7,19 +7,74 @@ package models;
 /**
  *
  * @author Engyz
- */
-    import java.util.ArrayList;
+**/
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Student extends User {
-    private ArrayList<String> enrolledCourses = new ArrayList<>();
-    private ArrayList<String> progress = new ArrayList<>();
+    private List<String> enrolledCourses;
+    private Map<String, Object> progress;
 
-    public Student(String userId, String username, String email, String passwordHash) {
-        super(userId, "student", username, email, passwordHash);
+    // Constructor for new student
+    public Student(String username, String email, String passwordHash) {
+        super(username, email, passwordHash, "Student");
+        this.enrolledCourses = new ArrayList<>();
+        this.progress = new HashMap<>();
     }
 
-    public ArrayList<String> getEnrolledCourses() { return enrolledCourses; }
-    public ArrayList<String> getProgress() { return progress; }
+    // Constructor for loading from JSON
+    public Student(String userId, String username, String email, String passwordHash, 
+                   List<String> enrolledCourses, Map<String, Object> progress) {
+        super(userId, username, email, passwordHash, "Student");
+        this.enrolledCourses = enrolledCourses != null ? enrolledCourses : new ArrayList<>();
+        this.progress = progress != null ? progress : new HashMap<>();
+    }
+
+    @Override
+    public String getDetails() {
+        return "Student: " + username + " (" + email + ") - Enrolled in " + 
+               enrolledCourses.size() + " courses";
+    }
+
+    // Enroll in a course
+    public void enrollInCourse(String courseId) {
+        if (!enrolledCourses.contains(courseId)) {
+            enrolledCourses.add(courseId);
+        }
+    }
+
+    // Update progress for a course/lesson
+    public void updateProgress(String key, Object value) {
+        progress.put(key, value);
+    }
+
+    // Getters and Setters
+    public List<String> getEnrolledCourses() {
+        return enrolledCourses;
+    }
+
+    public void setEnrolledCourses(List<String> enrolledCourses) {
+        this.enrolledCourses = enrolledCourses;
+    }
+
+    public Map<String, Object> getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Map<String, Object> progress) {
+        this.progress = progress;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "userId='" + userId + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", enrolledCourses=" + enrolledCourses.size() +
+                '}';
+    }
 }
-
-
