@@ -12,21 +12,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Instructor extends User {
-    private List<String> createdCourses = new ArrayList<>();
+    private List<String> createdCourses;
 
-    public Instructor() {
-        this.role = "instructor";
+    // Constructor for new instructor
+    public Instructor(String username, String email, String passwordHash) {
+        super(username, email, passwordHash, "Instructor");
+        this.createdCourses = new ArrayList<>();
     }
 
-    public Instructor(String userId, String username, String email, String passwordHash) {
-        super(userId, "instructor", username, email, passwordHash);
+    // Constructor for loading from JSON
+    public Instructor(String userId, String username, String email, String passwordHash, 
+                      List<String> createdCourses) {
+        super(userId, username, email, passwordHash, "Instructor");
+        this.createdCourses = createdCourses != null ? createdCourses : new ArrayList<>();
     }
 
-    public List<String> getCreatedCourses() { return createdCourses; }
-    public void setCreatedCourses(List<String> createdCourses) { this.createdCourses = createdCourses; }
+    @Override
+    public String getDetails() {
+        return "Instructor: " + username + " (" + email + ") - Created " + 
+               createdCourses.size() + " courses";
+    }
 
+    // Add a created course
     public void addCreatedCourse(String courseId) {
-        if (!createdCourses.contains(courseId)) createdCourses.add(courseId);
+        if (!createdCourses.contains(courseId)) {
+            createdCourses.add(courseId);
+        }
+    }
+
+    // Remove a course
+    public void removeCourse(String courseId) {
+        createdCourses.remove(courseId);
+    }
+
+    // Getters and Setters
+    public List<String> getCreatedCourses() {
+        return createdCourses;
+    }
+
+    public void setCreatedCourses(List<String> createdCourses) {
+        this.createdCourses = createdCourses;
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "userId='" + userId + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", createdCourses=" + createdCourses.size() +
+                '}';
     }
 }
-
