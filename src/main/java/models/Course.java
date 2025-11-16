@@ -67,4 +67,7 @@ public class Course {
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
     }
+     public String toString(){
+     return title + " (ID: " + courseId + ")";
+ }
 }
