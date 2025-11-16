@@ -13,15 +13,12 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordHasher {
     
-    /**
-     * Hashes a password using SHA-256
-     */
+
     public static String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(password.getBytes());
             
-            // Convert bytes to hexadecimal string
             StringBuilder hexString = new StringBuilder();
             for (byte b : hashBytes) {
                 String hex = Integer.toHexString(0xff & b);
@@ -37,9 +34,6 @@ public class PasswordHasher {
         }
     }
 
-    /**
-     * Verifies a password against a hash
-     */
     public static boolean verifyPassword(String rawPassword, String hashedPassword) {
         if (rawPassword == null || hashedPassword == null) {
             return false;
@@ -48,9 +42,6 @@ public class PasswordHasher {
         return hashedInput.equals(hashedPassword);
     }
 
-    /**
-     * Test method
-     */
     public static void main(String[] args) {
         String password = "mySecurePassword123";
         String hashed = hashPassword(password);
