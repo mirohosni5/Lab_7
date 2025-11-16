@@ -63,5 +63,9 @@ public class CourseManager {
         return result;
     }
 
+    public List<Course> getAllAvailableCourses() {
+        return JsonDatabaseManager.readCourses();
+    }
+
 
 }
