@@ -162,18 +162,18 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "All fields are required.");
             return;
         }
-        String hashed = HashUtil.hashPassword(password);
+        String passwordHash = HashUtil.hashPassword(password);
 
         User user;
         if (role.equals("Student")) {
-            user = new Student(userName, email, hashed);
+            user = new Student(userName, email,passwordHash);
         } else {
-            user = new Instructor(userName, email, hashed);
+            user = new Instructor(userName, email,passwordHash );
         }
 
-        UserManager um = new UserManager();
+        UserManager manager = new UserManager();
 
-        boolean added = um.addUser(user);
+        boolean added = manager.addUser(user);
 
         if (added) {
             JOptionPane.showMessageDialog(this, "Account Created Successfully!");
