@@ -21,7 +21,8 @@ CourseManager manager=new CourseManager();
         
     }
   public void LoadEnrolledCourses() {
-    List<Course> courses = manager.getEnrolledCourses(student);
+     String id = (student.getUserId());
+    List<Course> courses = manager.getEnrolledCourses(Integer.parseInt(id));
     javax.swing.table.DefaultTableModel model =(javax.swing.table.DefaultTableModel) jTable1.getModel();
     model.setRowCount(0);
     for (Course c : courses) {
