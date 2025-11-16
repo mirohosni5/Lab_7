@@ -9,6 +9,6 @@ public class Course {
     private String description;
     private int instructorId;
 
-
-
+    private List<Integer> students;
+    private List<Lesson> lessons;
 }
