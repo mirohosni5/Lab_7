@@ -23,7 +23,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
      * Creates new form InstructorDashboardFrame
      */
     public InstructorDashboardFrame() {
-        initComponents();
+       initComponents();
 
     // --- UI model setup ---
     courseModel = new DefaultListModel<>();
@@ -42,7 +42,7 @@ public class InstructorDashboardFrame extends javax.swing.JFrame {
             courseIds.add(cid);
             courseModel.addElement("(course " + cid + ")"); // placeholder until courses storage exists
         }
-    }}
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
