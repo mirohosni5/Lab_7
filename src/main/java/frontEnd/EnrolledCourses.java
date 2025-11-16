@@ -6,21 +6,22 @@ package frontEnd;
 import java.util.List;
 import Services.CourseManager;
 import models.Course;
+import models.Student;
 /**
  *
  * @author M
  */
 public class EnrolledCourses extends javax.swing.JPanel {
-    private int studentId;
+    private Student student;
 CourseManager manager=new CourseManager();
-    public EnrolledCourses(int studentId) {
-        this.studentId=studentId;
+    public EnrolledCourses(Student student) {
+        this.student=student;
         initComponents();
         LoadEnrolledCourses();
         
     }
   public void LoadEnrolledCourses() {
-    List<Course> courses = manager.getEnrolledCourses(studentId);
+    List<Course> courses = manager.getEnrolledCourses(student);
     javax.swing.table.DefaultTableModel model =(javax.swing.table.DefaultTableModel) jTable1.getModel();
     model.setRowCount(0);
     for (Course c : courses) {
