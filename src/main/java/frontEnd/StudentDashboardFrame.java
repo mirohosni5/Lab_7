@@ -9,11 +9,9 @@ package frontEnd;
  * @author M
  */
 public class StudentDashboardFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form StudentDashboardFrame
-     */
-    public StudentDashboardFrame() {
+    private int currentStudentId;
+    public StudentDashboardFrame(int studentId) {
+        this.currentStudentId=studentId;
         initComponents();
     }
 
@@ -119,7 +117,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         mainPanel.removeAll();
-        mainPanel.add(new EnrolledCourses());
+        mainPanel.add(new EnrolledCourses(currentStudentId));
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -181,7 +179,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentDashboardFrame().setVisible(true);
+                new StudentDashboardFrame(1).setVisible(true);
             }
         });
     }

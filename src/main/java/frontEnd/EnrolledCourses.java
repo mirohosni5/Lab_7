@@ -11,14 +11,16 @@ import models.Course;
  * @author M
  */
 public class EnrolledCourses extends javax.swing.JPanel {
+    private int studentId;
 backend.CourseManager manager=new backend.CourseManager();
-    public EnrolledCourses() {
+    public EnrolledCourses(int studentId) {
+        this.studentId=studentId;
         initComponents();
         LoadEnrolledCourses();
         
     }
   public void LoadEnrolledCourses() {
-    List<Course> courses = manager.getEnrolledCourses();
+    List<Course> courses = manager.getEnrolledCourses(studentId);
     javax.swing.table.DefaultTableModel model =(javax.swing.table.DefaultTableModel) jTable1.getModel();
     model.setRowCount(0);
     for (Course c : courses) {
