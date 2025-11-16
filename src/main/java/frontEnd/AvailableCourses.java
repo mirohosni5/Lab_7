@@ -4,14 +4,14 @@
  */
 package frontEnd;
 import java.util.List;
-import backend.CourseManager;
+import Services.CourseManager;
 import models.Course;
 /**
  *
  * @author M
  */
 public class AvailableCourses extends javax.swing.JPanel {
-backend.CourseManager manager=new backend.CourseManager();
+CourseManager manager=new CourseManager();
     /**
      * Creates new form AvailableCourses
      */
