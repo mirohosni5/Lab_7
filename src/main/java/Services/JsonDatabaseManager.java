@@ -11,5 +11,4 @@ public class JsonDatabaseManager {
     private static final String COURSES_FILE = "courses.json";
     private static final Gson gson = new Gson();
 
-
 }
