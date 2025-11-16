@@ -21,4 +21,18 @@ public class LessonManager {
         return maxId + 1;
     }
 
+    public void addLesson(int courseId, String title, String content) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                int newId = generateLessonId(c);
+                Lesson lesson = new Lesson(newId, title, content, List.of());
+                c.getLessons().add(lesson);
+                break;
+            }
+        }
+        JsonDatabaseManager.writeCourses(courses);
+    }
+
 }
