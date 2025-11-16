@@ -35,4 +35,22 @@ public class LessonManager {
         JsonDatabaseManager.writeCourses(courses);
     }
 
+    public void updateLesson(int courseId, int lessonId, String newTitle, String newContent) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                for (Lesson l : c.getLessons()) {
+                    if (l.getLessonId() == lessonId) {
+                        l.setTitle(newTitle);
+                        l.setContent(newContent);
+                        break;
+                    }
+                }
+            }
+        }
+
+        JsonDatabaseManager.writeCourses(courses);
+    }
+
 }
