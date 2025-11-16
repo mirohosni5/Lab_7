@@ -6,19 +6,20 @@ package frontEnd;
 
 import Services.CourseManager;
 import javax.swing.JOptionPane;
+import models.Student;
 
 /**
  *
  * @author M
  */
 public class EnrollinCourse extends javax.swing.JPanel {
-private int studentId;
+private Student student;
 CourseManager manager=new CourseManager();
     /**
      * Creates new form EnrollinCourse
      */
-    public EnrollinCourse(int studentId) {
-        this.studentId=studentId;
+    public EnrollinCourse(Student student) {
+        this.student=student;
         initComponents();
     }
 
@@ -95,7 +96,7 @@ CourseManager manager=new CourseManager();
          try {
         int courseId = Integer.parseInt(jTextField1.getText());
         
-        boolean success = manager.enrollStudentInCourse(studentId, courseId);
+        boolean success = manager.enrollStudentInCourse(student, courseId);
         
         if (success) {
             JOptionPane.showMessageDialog(this, "Successfully Enrolled!");
