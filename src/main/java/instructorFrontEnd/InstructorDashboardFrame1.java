@@ -1,3 +1,5 @@
+package instructorFrontEnd;
+
 
 
 /*
@@ -11,6 +13,7 @@
  */
 
 
+import *;
 import database.JsonUserDatabase;
 import models.Instructor;
 import models.User;
