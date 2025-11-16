@@ -3,15 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package frontEnd;
-
+import models.Student;
 /**
  *
  * @author M
  */
 public class StudentDashboardFrame extends javax.swing.JFrame {
-    private int currentStudentId;
-    public StudentDashboardFrame(int studentId) {
-        this.currentStudentId=studentId;
+    private Student student;
+    public StudentDashboardFrame(Student student) {
+        initComponents();
+        this.student=student;
+    }
+        public StudentDashboardFrame() {
         initComponents();
     }
 
@@ -117,14 +120,14 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         mainPanel.removeAll();
-        mainPanel.add(new EnrolledCourses(currentStudentId));
+        mainPanel.add(new EnrolledCourses(student));
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         mainPanel.removeAll();
-        mainPanel.add(new EnrollinCourse(currentStudentId));
+        mainPanel.add(new EnrollinCourse(student));
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -179,7 +182,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentDashboardFrame(1).setVisible(true);
+                new StudentDashboardFrame().setVisible(true);
             }
         });
     }
