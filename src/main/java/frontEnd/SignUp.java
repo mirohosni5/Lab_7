@@ -4,7 +4,12 @@
  */
 package frontEnd;
 
+import Services.HashUtil;
+import Services.UserManager;
 import javax.swing.JOptionPane;
+import models.Instructor;
+import models.Student;
+import models.User;
 
 /**
  *
@@ -157,7 +162,26 @@ public class SignUp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "All fields are required.");
             return;
         }
-        
+        String hashed = HashUtil.hashPassword(password);
+
+        User user;
+        if (role.equals("Student")) {
+            user = new Student(userName, email, hashed);
+        } else {
+            user = new Instructor(userName, email, hashed);
+        }
+
+        UserManager um = new UserManager();
+
+        boolean added = um.addUser(user);
+
+        if (added) {
+            JOptionPane.showMessageDialog(this, "Account Created Successfully!");
+            this.dispose();
+            new Login().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Email already exists!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
