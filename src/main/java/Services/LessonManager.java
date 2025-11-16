@@ -63,4 +63,14 @@ public class LessonManager {
         JsonDatabaseManager.writeCourses(courses);
     }
 
+    public List<Lesson> getLessons(int courseId) {
+        CourseManager cm = new CourseManager();
+        Course c = cm.getCourseById(courseId);
+
+        if (c != null)
+            return c.getLessons();
+
+        return List.of();
+    }
+
 }
