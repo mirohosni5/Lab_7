@@ -30,6 +30,8 @@ public class CourseManager {
                 break;
             }
         }
+        JsonDatabaseManager.writeCourses(courses);
     }
+
 
 }
