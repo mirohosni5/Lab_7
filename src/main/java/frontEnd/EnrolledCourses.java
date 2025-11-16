@@ -4,7 +4,7 @@
  */
 package frontEnd;
 import java.util.List;
-import backend.CourseManager;
+import Services.CourseManager;
 import models.Course;
 /**
  *
@@ -12,7 +12,7 @@ import models.Course;
  */
 public class EnrolledCourses extends javax.swing.JPanel {
     private int studentId;
-backend.CourseManager manager=new backend.CourseManager();
+CourseManager manager=new CourseManager();
     public EnrolledCourses(int studentId) {
         this.studentId=studentId;
         initComponents();
