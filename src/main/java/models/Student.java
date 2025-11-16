@@ -25,7 +25,6 @@ public class Student extends User {
         this.progress = new HashMap<>();
     }
 
-    // Constructor for loading from JSON
     public Student(String userId, String username, String email, String passwordHash, 
                    List<String> enrolledCourses, Map<String, Object> progress) {
         super(userId, username, email, passwordHash, "Student");
@@ -39,19 +38,18 @@ public class Student extends User {
                enrolledCourses.size() + " courses";
     }
 
-    // Enroll in a course
     public void enrollInCourse(String courseId) {
         if (!enrolledCourses.contains(courseId)) {
             enrolledCourses.add(courseId);
         }
     }
 
-    // Update progress for a course/lesson
+   
     public void updateProgress(String key, Object value) {
         progress.put(key, value);
     }
 
-    // Getters and Setters
+  
     public List<String> getEnrolledCourses() {
         return enrolledCourses;
     }
