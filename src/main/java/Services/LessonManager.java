@@ -49,7 +49,17 @@ public class LessonManager {
                 }
             }
         }
+        JsonDatabaseManager.writeCourses(courses);
+    }
 
+    public void deleteLesson(int courseId, int lessonId) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                c.getLessons().removeIf(l -> l.getLessonId() == lessonId);
+            }
+        }
         JsonDatabaseManager.writeCourses(courses);
     }
 
