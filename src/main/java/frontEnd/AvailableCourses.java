@@ -20,7 +20,7 @@ backend.CourseManager manager=new backend.CourseManager();
         loadAvailableCourses();
     }
   public void loadAvailableCourses() {
-    List<Course> courses = manager.getAllCourses();
+    List<Course> courses = manager.getAllAvailableCourses();
     javax.swing.table.DefaultTableModel model =(javax.swing.table.DefaultTableModel) jTable1.getModel();
     model.setRowCount(0);
     for (Course c : courses) {
