@@ -51,5 +51,17 @@ public class CourseManager {
         return null;
     }
 
+    public List<Course> getCoursesByInstructor(int instructorId) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+        List<Course> result = new ArrayList<>();
+
+        for (Course c : courses) {
+            if (c.getInstructorId() == instructorId) {
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
 
 }
