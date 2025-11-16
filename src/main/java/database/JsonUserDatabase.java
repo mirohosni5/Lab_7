@@ -103,12 +103,10 @@ public class JsonUserDatabase {
                 return false;
             }
         }
-        
         users.add(user);
         writeUsersToFile(users);
         return true;
     }
-
     public boolean updateUser(String userId, User updatedUser) {
         List<User> users = readUsersFromFile();
         
