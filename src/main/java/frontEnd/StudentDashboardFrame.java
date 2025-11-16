@@ -124,7 +124,7 @@ public class StudentDashboardFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         mainPanel.removeAll();
-        mainPanel.add(new EnrollinCourse());
+        mainPanel.add(new EnrollinCourse(currentStudentId));
         mainPanel.revalidate();
         mainPanel.repaint();
     }//GEN-LAST:event_jButton3ActionPerformed
