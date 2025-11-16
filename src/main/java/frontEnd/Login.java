@@ -145,7 +145,7 @@ public class Login extends javax.swing.JFrame {
         if (user.getRole().equals("Student")) {
             new StudentDashboardFrame((Student) user).setVisible(true);
         } else {
-            new instructorDashboardFrame((Instructor) user).setVisible(true);
+            new InstructorDashboardFrame().setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
