@@ -12,10 +12,16 @@ public class NewJDialog extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public NewJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
+public NewJDialog(java.awt.Frame parent, boolean modal) {
+    super(parent, modal);
+    initComponents();
+
+    // attach cancel behaviour (btnCancel has no handler from GUI builder)
+    btnCancel.addActionListener(evt -> onCancel());
+
+    // optionally make Enter in the title behave like save (already wired if you used actionPerformed)
+    txtTitle.addActionListener(evt -> onSave());
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +32,159 @@ public class NewJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        txtTitle = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CourseEditor");
+        setModal(true);
+
+        jLabel1.setText("Title\n");
+
+        txtTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTitleActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel)))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnCancel)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+// === paste this block AFTER initComponents() and outside generated code ===
+
+// dialog result fields
+private boolean saved = false;
+private CourseData savedCourse = null;
+
+/**
+ * Simple internal Course holder. Replace with your project's Course class if you want.
+ */
+public static class CourseData {
+    private String id;
+    private String title;
+    private String description;
+
+    public CourseData() {}
+    public CourseData(String id, String title, String description) {
+        this.id = id; this.title = title; this.description = description;
+    }
+
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+
+    @Override
+    public String toString() { return title == null ? "<no title>" : title; }
+}
+
+/**
+ * Called when Save is pressed (wired from your btnSaveActionPerformed).
+ * If you later add a description field, replace "" with txtDescription.getText().trim()
+ */
+private void onSave() {
+    String title = txtTitle.getText().trim();
+    String desc = ""; // no description field yet - change if you add one
+
+    if (title.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Title is required.", "Validation", javax.swing.JOptionPane.WARNING_MESSAGE);
+        txtTitle.requestFocus();
+        return;
+    }
+
+    CourseData c = new CourseData();
+    c.setId(java.util.UUID.randomUUID().toString());
+    c.setTitle(title);
+    c.setDescription(desc);
+
+    this.savedCourse = c;
+    this.saved = true;
+    this.dispose();
+}
+
+/** Called when Cancel is pressed or ESC binding runs */
+private void onCancel() {
+    this.saved = false;
+    this.savedCourse = null;
+    this.dispose();
+}
+
+/** Caller checks this after dialog closes */
+public boolean isSaved() {
+    return saved;
+}
+
+/** Returns the created CourseData (check isSaved() first) */
+public CourseData getSavedCourse() {
+    return savedCourse;
+}
+
+
+
+
+    private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
+        onSave();
+    }//GEN-LAST:event_txtTitleActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        onSave();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        onCancel();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,7 +227,10 @@ public class NewJDialog extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 }
