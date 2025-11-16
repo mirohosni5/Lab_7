@@ -95,8 +95,8 @@ CourseManager manager=new CourseManager();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          try {
         int courseId = Integer.parseInt(jTextField1.getText());
-        
-        boolean success = manager.enrollStudentInCourse(student, courseId);
+        String id = (student.getUserId());
+        boolean success = manager.enrollStudentInCourse(Integer.parseInt(id), courseId);
         
         if (success) {
             JOptionPane.showMessageDialog(this, "Successfully Enrolled!");
