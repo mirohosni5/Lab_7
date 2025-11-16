@@ -3,20 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package frontEnd;
-
+import java.util.List;
+import backend.CourseManager;
+import models.Course;
 /**
  *
  * @author M
  */
 public class AvailableCourses extends javax.swing.JPanel {
-
+backend.CourseManager manager=new backend.CourseManager();
     /**
      * Creates new form AvailableCourses
      */
     public AvailableCourses() {
         initComponents();
+        loadAvailableCourses();
     }
-
+  public void loadAvailableCourses() {
+    List<Course> courses = manager.getAllCourses();
+    javax.swing.table.DefaultTableModel model =(javax.swing.table.DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+    for (Course c : courses) {
+        model.addRow(new Object[]{c.getCourseId(),c.getTitle(),c.getDescription(),c.getInstructorId()});
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
