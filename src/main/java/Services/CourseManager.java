@@ -20,4 +20,16 @@ public class CourseManager {
         return course;
     }
 
+    public void updateCourse(int courseId, String newTitle, String newDescription) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                c.setTitle(newTitle);
+                c.setDescription(newDescription);
+                break;
+            }
+        }
+    }
+
 }
