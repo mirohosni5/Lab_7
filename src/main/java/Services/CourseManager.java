@@ -67,5 +67,22 @@ public class CourseManager {
         return JsonDatabaseManager.readCourses();
     }
 
+    public boolean enrollStudentInCourse(int studentId, int courseId) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId) {
+                if (!c.getStudents().contains(studentId)) {
+                    c.getStudents().add(studentId);
+                    JsonDatabaseManager.writeCourses(courses);
+                    return true;
+                } else {
+                    return false;  //student already  previously registered
+                }
+            }
+        }
+        return false;  //if course is not found
+    }
+
 
 }

@@ -95,7 +95,7 @@ CourseManager manager=new CourseManager();
          try {
         int courseId = Integer.parseInt(jTextField1.getText());
         
-        boolean success = manager.enrollStudentInCourse(studentId, courseId);
+        boolean success = manager.enrollStudentInCourse(courseId, studentId);
         
         if (success) {
             JOptionPane.showMessageDialog(this, "Successfully Enrolled!");
