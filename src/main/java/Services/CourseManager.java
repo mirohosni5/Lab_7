@@ -84,4 +84,17 @@ public class CourseManager {
         return false;  //if course is not found
     }
 
+    public List<Course> getEnrolledCourses(int studentId) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+        List<Course> enrolledCourses = new ArrayList<>();
+
+        for (Course c : courses) {
+            if (c.getStudents().contains(studentId)) {
+                enrolledCourses.add(c);
+            }
+        }
+        return enrolledCourses;
+    }
+
+
 }
