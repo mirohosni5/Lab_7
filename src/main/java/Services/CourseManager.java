@@ -6,4 +6,5 @@ import models.Lesson;
 import java.util.List;
 
 public class CourseManager {
+
 }
