@@ -33,5 +33,12 @@ public class CourseManager {
         JsonDatabaseManager.writeCourses(courses);
     }
 
+    public void deleteCourse(int courseId) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
+
+        courses.removeIf(c -> c.getCourseId() == courseId);
+
+        JsonDatabaseManager.writeCourses(courses);
+    }
 
 }
