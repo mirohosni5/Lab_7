@@ -9,5 +9,4 @@ public class CourseManager {
     private int generateCourseId() {
         return (int)(Math.random() * 9000) + 1000;
     }
-
 }
