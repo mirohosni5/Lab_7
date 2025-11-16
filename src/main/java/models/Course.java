@@ -20,5 +20,51 @@ public class Course {
         this.lessons = new ArrayList<>();
     }
 
+    public int getCourseId() {
+        return courseId;
+    }
 
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getInstructorId() {
+        return instructorId;
+    }
+
+    public void setInstructorId(int instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public List<Integer> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Integer> students) {
+        this.students = students;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
 }
