@@ -31,10 +31,8 @@ public abstract class User {
         this.role = role;
     }
 
-    // Abstract method for polymorphism
     public abstract String getDetails();
 
-    // Getters and Setters
     public String getUserId() {
         return userId;
     }
@@ -84,8 +82,5 @@ public abstract class User {
                 ", email='" + email + '\'' +
                 '}';
     }
-
- //   
-    
     
 }
