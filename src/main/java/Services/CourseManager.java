@@ -2,7 +2,7 @@ package Services;
 
 import models.Course;
 
-import java.util.List;
+import java.util.*;
 
 public class CourseManager {
     private int generateCourseId(List<Course> courses) {
@@ -41,6 +41,14 @@ public class CourseManager {
         JsonDatabaseManager.writeCourses(courses);
     }
 
+    public Course getCourseById(int courseId) {
+        List<Course> courses = JsonDatabaseManager.readCourses();
 
+        for (Course c : courses) {
+            if (c.getCourseId() == courseId)
+                return c;
+        }
+        return null;
+    }
 
 }
