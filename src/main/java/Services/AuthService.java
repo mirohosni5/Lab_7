@@ -63,7 +63,7 @@ public class AuthService {
 
         boolean success = userManager.addUser(newUser);
         if (success) {
-            System.out.println("✓ User registered successfully!");
+            System.out.println(" User registered successfully!");
             System.out.println("User ID: " + newUser.getUserId());
         }
         return success;
@@ -93,14 +93,14 @@ public class AuthService {
 
         // Login successful
         currentUser = user;
-        System.out.println("✓ Login successful!");
+        System.out.println(" Login successful!");
         System.out.println("Welcome, " + user.getUsername() + " (" + user.getRole() + ")");
         return user;
     }
 
     public void logout() {
         if (currentUser != null) {
-            System.out.println("✓ User " + currentUser.getUsername() + " logged out.");
+            System.out.println(" User " + currentUser.getUsername() + " logged out.");
             currentUser = null;
         } else {
             System.out.println("No user is currently logged in.");
