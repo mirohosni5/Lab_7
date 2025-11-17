@@ -1,6 +1,6 @@
 package instructorFrontEnd;
 
-import *;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,11 +21,11 @@ public class NewJDialog extends javax.swing.JDialog {
         initComponents();
     }
     
-    // === dialog result fields ===
+    
 private boolean saved = false;
 private CourseData savedCourse = null;
 
-/** Simple internal Course holder — replace with your real Course later if you want. */
+/**/
 public static class CourseData {
     private String id;
     private String title;
@@ -48,23 +48,35 @@ public static class CourseData {
     @Override
     public String toString() { return title == null ? "<no title>" : title; }
 }
-// used to preserve id when editing an existing course
 private String editingId = null;
 
-/** If you open dialog for editing, call this with the existing CourseData */
-public void setEditingCourse(CourseData cd) {
-    if (cd == null) return;
-    this.editingId = cd.getId();
-    setTitleField(cd.getTitle());
-    // if you later add a description field, set it here:
-    // setDescriptionField(cd.getDescription());
+
+public void setTitleField(String title) {
+    if (title == null) title = "";
+
+    
+    txtTitle.setText(title);
+
+   
+    java.awt.event.ActionListener[] listeners = txtTitle.getActionListeners();
+    for (java.awt.event.ActionListener l : listeners) {
+        txtTitle.removeActionListener(l);
+    }
+
+    
+    txtTitle.addActionListener(new java.awt.event.ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            onSave();
+        }
+    });
 }
 
-// === save handling ===
+
 private void onSave() {
    
     String title = txtTitle.getText().trim();
-    String desc = ""; // placeholder if you don't have a description field yet
+    String desc = ""; 
 
     if (title.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this,
@@ -74,7 +86,7 @@ private void onSave() {
     }
 
     CourseData c = new CourseData();
-    // preserve id when editing, otherwise generate new one
+    
     if (this.editingId != null) c.setId(this.editingId);
     else c.setId(java.util.UUID.randomUUID().toString());
 
@@ -83,7 +95,7 @@ private void onSave() {
 
     this.savedCourse = c;
     this.saved = true;
-    // reset editingId so next open without setEditingCourse() becomes a new create
+    
     this.editingId = null;
     this.dispose();
 
@@ -92,8 +104,10 @@ private void onSave() {
 
 // === cancel handling ===
 private void onCancel() {
-    this.saved = false;
+     this.saved = false;
     this.savedCourse = null;
+    // Important: clear editingId so a cancelled edit doesn't leak into next open
+    this.editingId = null;
     this.dispose();
 }
 
@@ -102,10 +116,7 @@ public boolean isSaved() { return saved; }
 public CourseData getSavedCourse() { return savedCourse; }
 
 // helper (used by Edit flow to pre-fill)
-public void setTitleField(String title) {
-    if (title == null) title = "";
-    txtTitle.setText(title);
-}
+
 
 
     /**
